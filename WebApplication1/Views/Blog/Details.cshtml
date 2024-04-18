@@ -1,0 +1,64 @@
+﻿@model WebApplication1.Models.BlogDetails
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .blog-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .blog-author {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .blog-content {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .blog-date {
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+@*     <div>
+        <h2 class="blog-title">@Model.Title</h2>
+        <p class="blog-author"><strong>Author:</strong> @Model.Authorname</p>
+        <p class="blog-content">@Html.Raw(Model.Content)</p>
+        <p class="blog-date"><strong>Publication Date:</strong> @Model.PublicationDate.ToString("yyyy-MM-dd")</p>
+    </div> *@
+
+    <div class="blog-container">
+        <h2 class="blog-title">@Model.Title</h2>
+        <p class="blog-author"><strong>Author:</strong> @Model.Authorname</p>
+        <p class="blog-content">@Html.Raw(Model.Content)</p>
+        <p class="blog-date"><strong>Publication Date:</strong> @Model.PublicationDate.ToString("yyyy-MM-dd")</p>
+    </div>
+
+</body>
+</html>

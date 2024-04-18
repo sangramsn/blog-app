@@ -1,0 +1,131 @@
+﻿<!-- Index.cshtml -->
+@model List<WebApplication1.Models.BlogDetails>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #C8C8C8;
+        color: #333;
+    }
+
+    h1 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+    .blog-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .blog-item {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: relative; /* Added */
+    }
+
+    .blog-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .blog-author {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .blog-content {
+        font-size: 16px;
+        color: #333;
+        line-height: 1.5;
+    }
+
+    .blog-date {
+        font-size: 12px;
+        color: #999;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        text-decoration: none;
+        position: absolute; /* Added */
+        top: 20px; /* Adjust as needed */
+        right: 20px; /* Adjust as needed */
+    }
+
+    .btn-primary:hover {
+            background-color: #0056b3;
+    }
+
+    .blog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .view-link {
+        margin-top: -10px;
+    }
+
+    .blog-buttons {
+        margin-top: 10px;
+    }
+</style>
+<h1>Blog Posts</h1>
+
+<ul class="blog-list">
+    @foreach (var blog in Model)
+    {
+        <li class="blog-item">
+            <div class="blog-header">
+                <div class="form-group d-none">
+                    <label for="id_@blog.Id">Id:</label>
+                    <input type="text" id="id_@blog.Id" value="@blog.Id" readonly>
+                </div>
+                <div>
+                    <h2 class="blog-title">@blog.Title</h2>
+                    <p class="blog-author"><strong>Author:</strong> @blog.Authorname</p>
+                </div>
+                <div class="view-link">
+                    <a href="@Url.Action("Details", "Blog", new { id = blog.Id })">View</a>
+                </div>
+            </div>
+            <div class="blog-buttons">
+                <a href="@Url.Action("ViewDetails", "Blog", new { id = blog.Id })" class="btn btn-secondary">Edit</a>
+                <button type="button" onclick="deleteBlog(@blog.Id)" class="btn btn-danger">Delete</button>
+            </div>
+        </li>
+    }
+</ul>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Function to delete a blog post
+    function deleteBlog(blogId) {
+        $.ajax({
+            url: "/Blog/Delete",
+            type: "POST",
+            data: { id: blogId },
+            success: function (response) {
+                console.log("Blog deleted successfully");
+                window.location.href = response.redirectToUrl;
+            },
+            error: function (xhr, status, error) {
+                // Handle error response
+                console.error("Error deleting blog:", error);
+            }
+        });
+    }
+</script>
+
+
